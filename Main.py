@@ -56,3 +56,55 @@ def generate_data():
     return data
 
 
+def create_bar_chart(data):
+    # --- BAR CHART: Average Temperature by City ---
+    plt.figure(figsize=(12, 6))
+    sns.barplot(y=data["City"], x=data["Avg Temp (F)"], hue=data["City"], palette="coolwarm", legend=False)
+    plt.xlabel("Average Temperature (F)")
+    plt.ylabel("City")
+    plt.title("Average Annual Temperature by City")
+    plt.savefig("charts/avg_temp_by_city.png")
+    plt.close()
+
+
+def create_scatter_plot(data):
+
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(x=data["Annual Rainfall (in)"], y=data["Sunny Days Per Year"], hue=data["City"], palette="viridis", s=100)
+    plt.xlabel("Annual Rainfall (inches)")
+    plt.ylabel("Sunny Days Per Year")
+    plt.title("Rainfall vs. Sunny Days by City")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.savefig("charts/rainfall_vs_sunny.png")
+    plt.close()
+
+
+def create_pie_chart(data):
+
+    top5 = data.nlargest(5, "Sunny Days Per Year")
+    plt.figure(figsize=(8, 8))
+    plt.pie(top5["Sunny Days Per Year"], labels=top5["City"], autopct="%1.1f%%", colors=sns.color_palette("pastel"))
+    plt.title("Top 5 Sunniest Cities")
+    plt.savefig("charts/top5_sunniest.png")
+    plt.close()
+
+
+def create_box_plot(data):
+
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(y=data["Annual Rainfall (in)"])
+    plt.ylabel("Annual Rainfall (inches)")
+    plt.title("Distribution of Annual Rainfall Across Cities")
+    plt.savefig("charts/rainfall_distribution.png")
+    plt.close()
+
+
+def create_histogram(data):
+
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data["Sunny Days Per Year"], bins=10, kde=True, color="orange")
+    plt.xlabel("Sunny Days Per Year")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Cities by Sunny Days Per Year")
+    plt.savefig("charts/sunny_days_histogram.png")
+    plt.close()
