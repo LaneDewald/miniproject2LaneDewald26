@@ -25,4 +25,34 @@ from faker import Faker
 import random
 
 
+fake = Faker()
+
+
+sns.set_theme(style="darkgrid")
+
+
+os.makedirs("charts", exist_ok=True)
+
+
+def generate_data():
+
+    cities = [fake.city() for _ in range(20)]
+    avg_temp_f = [random.uniform(30, 95) for _ in range(20)]
+    annual_rain_inches = [random.uniform(10, 60) for _ in range(20)]
+    sunny_days = [random.randint(100, 300) for _ in range(20)]
+
+
+    data = pd.DataFrame({
+        "City": cities,
+        "Avg Temp (F)": avg_temp_f,
+        "Annual Rainfall (in)": annual_rain_inches,
+        "Sunny Days Per Year": sunny_days
+    })
+
+
+    data["Avg Temp (F)"] = data["Avg Temp (F)"].round(1)
+    data["Annual Rainfall (in)"] = data["Annual Rainfall (in)"].round(1)
+
+    return data
+
 
