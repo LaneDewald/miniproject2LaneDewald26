@@ -75,6 +75,7 @@ def create_scatter_plot(data):
     plt.ylabel("Sunny Days Per Year")
     plt.title("Rainfall vs. Sunny Days by City")
     plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout()
     plt.savefig("charts/rainfall_vs_sunny.png")
     plt.close()
 
@@ -108,3 +109,13 @@ def create_histogram(data):
     plt.title("Distribution of Cities by Sunny Days Per Year")
     plt.savefig("charts/sunny_days_histogram.png")
     plt.close()
+
+
+if __name__ == "__main__":
+    data = generate_data()
+    print(data.head())
+    create_bar_chart(data)
+    create_scatter_plot(data)
+    create_pie_chart(data)
+    create_box_plot(data)
+    create_histogram(data)
